@@ -1,2 +1,7 @@
-let test = document.querySelector(".board")
+let board = document.querySelectorAll(".board")
 
+board.forEach(board => {
+    board.addEventListener("click",() =>{
+        console.log(`${board.value}`)
+    })
+});
