@@ -1,6 +1,7 @@
 const board = document.querySelectorAll(".board");
 const gameBoardState = Array(9).fill(null);
 let player = "player1";
+let GameOver = false;
 
 const producePlayer = (PlayerName, Marker) => {
   let score = [];
@@ -37,6 +38,7 @@ const updateGameBoard = (boardValue, index) => {
     player1.addScore(Number(boardValue.value));
     if (checkWinner(player1.getScore())) {
       alert(`${player1.getPlayerName()} wins!`);
+      GameOver = true;
       resetGame();
     }
     player = "player2";
@@ -46,10 +48,16 @@ const updateGameBoard = (boardValue, index) => {
     player2.addScore(Number(boardValue.value));
     if (checkWinner(player2.getScore())) {
       alert(`${player2.getPlayerName()} wins!`);
+      GameOver = true;
       resetGame();
     }
     player = "player1";
   }
+  if (player1.getScore().length + player2.getScore().length === 9 &&  GameOver === false){
+    alert("It's a draw!");
+    resetGame();
+}
+  console.log(player1.getScore().length)
 };
 
 const checkWinner = (currentPlayer) => {
@@ -80,4 +88,5 @@ const resetGame = () => {
   player2.getScore().length = 0;
   board.forEach((board) => (board.textContent = ""));
   player = "player1";
+  GameOver = false;
 };
